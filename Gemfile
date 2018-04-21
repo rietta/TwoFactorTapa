@@ -5,6 +5,22 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+##############################################################################
+# Specific gems for the Two Factor Topa Demo
+
+# The user authentication system and our 2FA library
+gem 'devise'
+gem 'devise-two-factor'
+
+# Despite the name, this works quite fine in Rails 5. It generates QR codes
+# without a dependency on 3rd party services which is bad for security because
+# your application would be leaking shared secret codes with another
+# service that you do not control.
+gem 'rqrcode-rails3'
+
+##############################################################################
+# Default Stuff from Rails New Below
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use sqlite3 as the database for Active Record
