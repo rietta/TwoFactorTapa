@@ -7,3 +7,37 @@ and then working with:
 
 - [devise-two-factor](https://github.com/tinfoil/devise-two-factor)
 - [rqrcode-rails3](https://github.com/samvincent/rqrcode-rails3), which despite its name works just fine in the latest Rails 5.
+
+
+## Script
+
+### Why
+Of all of the big data breaches involving web applications in recent years, 63% have been perpetrated through the use of compromised passwords! This means that even though there are many interesting technical ways that web-based software gets hacked, such as SQL injection, cross site scripting, session hijacking, and the other issues covered on the [OWASP Top 10](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project), as developers we cannot ignore the plight of the lowly username and password.
+
+This is especially true for users who have access to administrative portals in our applications.  These credentials may become compromised by:
+- User chosen passwords that are truly weak and easily compromised through an online brute force attack
+- Passwords that are re-used among accounts and have been compromised on the dark web (say the CEO likes to use the same e-mail and password everywhere)
+- Targeted spear phishing attacks that get the user to enter his or her password on a faked login that looks like your app’s official login page but instead gives the credentials up to the attacker
+
+So what can we do to help defend against this state of affairs?
+Two Factor Authentication, or 2FA for short, is here to the Rescue
+Because username and passwords are the only security perimeter in so many systems, we need to use something else to protect accounts. When a
+- username is something your user **is**,
+- and a password is something he or she **knows**,
+- the next step is to require something he or she **has**.
+
+A good way to do this is to require users, especially staff users, to use a smartphone app to generate a time-based two factor code.
+
+Now, you’ve probably seen these time-based code implementations in some of the big name services that you use online, like Gmail and Dropbox, but it’s also easy to add it to your Ruby application as well.
+
+### How Does TOTP Work?
+The Time-based One-time Password algorithm is an open standard that computes a one-time password that changes over time given a shared secret key.  
+
+On enrollment, our user is presented with a QR barcode that is an encoding of the secret string. But they can also be shown the code itself as you see here.
+
+The user scans the QR code or enters the secret string and completes the enrollment by confirming to current 6 digit TOTP code.  
+
+After this, the server can confirm that the user has in his or her position a device capable of generating a 6 digit code that can only be used one time and must be used within 60 seconds of its generation.
+
+### Visible Example
+While you can certainly implement TOTP in any Ruby application, I’m showing an example of the devise-twofactor and the rqrcode-rails3 gems added to a basic everyday Ruby on Rails and Devise application. The complete sample app is available at https://github.com/EXAMPLE/UPDATE-ME.
