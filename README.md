@@ -76,3 +76,18 @@ If all else fails, what you provide to recover accounts for when the 2FA and bac
 While you can certainly implement TOTP in any Ruby application, I’m showing an example of the `devise-two-factor` and the `rqrcode-rails3` gems added to a basic everyday Ruby on Rails and Devise application. The complete sample app is available at https://github.com/rietta/TwoFactorTopa.
 
 The Two Factor Tapa has login page that is available to the public and a secret lair page, where the member can see pictures of delicious tapas! However, because sharing these delicious tapas with unauthorized impostors would be a travesty, the user has to provide a current two factor code in addition to a password to login.
+
+[VIDEO OF INTERACTING WITH WEB BROWSER, LOGGING IN AND SEEING A DELICIOUS TAPA]
+
+#### How is this Done
+
+##### Gemfile
+[CODE EDITOR SCREEN CAP]
+
+##### User model / migration to show fields needed for the 2FA implementation
+[CODE EDITOR SCREEN CAP]
+
+##### Verifying a current 2FA code not just on login
+[CODE EDITOR SCREEN CAP]
+
+### Conclusion
