@@ -1,3 +1,7 @@
-class SecretLairsController < ApplicationController
-  
+class PrivateTapasController < ApplicationController
+  def show
+  end
+
+  def public
+  end
 end
