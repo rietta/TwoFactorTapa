@@ -18,6 +18,12 @@ gem 'devise-two-factor'
 # service that you do not control.
 gem 'rqrcode-rails3'
 
+
+##############################################################################
+# Useful, but not specifically part of the demo or rails defaults
+
+gem 'annotate'
+
 ##############################################################################
 # Default Stuff from Rails New Below
 
