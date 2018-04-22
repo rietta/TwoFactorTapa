@@ -36,9 +36,9 @@ The Time-based One-time Password algorithm is an open standard. It is a hash-bas
 
 The method is defined as:
 
-TC = floor((unixtime(now) − unixtime(T0)) / TI),
-TOTP = HOTP(SecretKey, TC),
-TOTP-Value = TOTP mod 10^6
+- TC = floor((unixtime(now) − unixtime(T0)) / TI),
+- TOTP = HOTP(SecretKey, TC),
+- TOTP-Value = TOTP mod 10^6
 
 (Source [Wikpedia](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)).
 
