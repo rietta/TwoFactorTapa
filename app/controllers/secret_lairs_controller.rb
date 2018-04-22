@@ -1,0 +1,3 @@
+class SecretLairsController < ApplicationController
+  
+end
