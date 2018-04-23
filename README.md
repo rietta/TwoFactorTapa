@@ -91,3 +91,5 @@ The Two Factor Tapa has login page that is available to the public and a secret 
 [CODE EDITOR SCREEN CAP]
 
 ### Conclusion
+
+Providing two factor authentication is a necessary step to providing good web application security. Otherwise, no matter what else you do to try to improve security will be defeated via user's choice of poor passwords as well as falling victim of simple phishing attack. The next step will be to ensure that as many users as possible make use of the feature. You should consider requiring those with administrative access to use 2FA.  And finally, don't just implement but be a user. Many of the websites and services that we Rubyists use in our daily work support 2FA. Use it everywhere for your and your customers' protection.
