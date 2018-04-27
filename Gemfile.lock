@@ -81,6 +81,7 @@ GEM
       devise (~> 4.0)
       railties (< 5.3)
       rotp (~> 2.0)
+    dotenv (2.4.0)
     encryptor (3.0.0)
     erubi (1.7.1)
     execjs (2.7.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-two-factor
+  dotenv
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)

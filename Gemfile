@@ -18,6 +18,9 @@ gem 'devise-two-factor'
 # service that you do not control.
 gem 'rqrcode-rails3'
 
+# Useful for using environment variables in a local test environment. You
+# do not want to store server secrets in the codebase.
+gem 'dotenv'
 
 ##############################################################################
 # Useful, but not specifically part of the demo or rails defaults
