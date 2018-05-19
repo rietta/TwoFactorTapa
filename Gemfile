@@ -20,7 +20,8 @@ gem 'rqrcode-rails3'
 
 # Useful for using environment variables in a local test environment. You
 # do not want to store server secrets in the codebase.
-gem 'dotenv'
+gem 'dotenv-rails', groups: [:development, :test]
+
 
 ##############################################################################
 # Useful, but not specifically part of the demo or rails defaults

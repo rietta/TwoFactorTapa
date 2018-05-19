@@ -1,3 +1,5 @@
+I've written this script in Markdown.  It is copied here from the private Github repository that I started. Happy to add you to the source.
+
 # RubyTapas #534 - Two Factor Authentication Demo Application
 
 ## Script
@@ -11,56 +13,97 @@ Of all of the big data breaches involving web applications in recent years, 63% 
 
 as developers we cannot ignore the plight of the username and password.
 
-While any users' account credentials being compromised is bad, the worst case is staff and administrative users who have access to administrative portals with OTHER users' personal information available. This is a recipe for a data breach.
+Any users' account credentials being compromised is bad. But the worst case is a
+compromise of a staff or administrative users, who have access to OTHER users'
+personal information. This is a recipe for a data breach.
 
-These credentials may become compromised by:
-- User chosen passwords that are truly weak and easily compromised through an online brute force attack
-- Passwords that are re-used among accounts and have been compromised on the dark web (say the CEO likes to use the same e-mail and password everywhere)
-- Targeted spear phishing attacks that get the user to enter his or her password on a faked login that looks like your app’s official login page but instead gives the credentials up to the attacker
+Here are some examples of ways these credentials could be compromised:
+- A user might choose passwords that are truly weak and are easily compromised
+  through a password cracking attack.
+- Someone might reuse a password among multiple accounts. For instance, a CEO
+  who uses the same e-mail and password everywhere. If *any* of those services
+  are compromised, an attacker could use those credentials to target the site
+  we're trying to protect.
+- An attacker might lure a user to use a faked login page that looks like ours.
+  This is known as a "spearphishing attack".
 
-The problem is so prevalent that U.S. National Institute for Science and Technology adopted a Federal standard in 2017 to address best practice guidelines for password verifiers. The standard is called [NIST Special Publication 800-63B, Digital Identity Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html). The standard challenges many of the practices that are regularly seen today such as limiting password length or making users change their passwords too often. It also strongly recommends the use of multi-factor authentication. As a pro-tip, being able to say your SaaS complies with the NIST 800-63b can be a great enterprise selling feature selling factor!
+The problem is so prevalent that U.S. National Institute for Science and
+Technology adopted a Federal standard in 2017 to address best practice
+guidelines for password verifiers. The standard is called [NIST Special
+Publication 800-63B, Digital Identity
+Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html). This standard
+challenges many of the recommendations you might have come across for password
+security.
+
+For example the requirement that users change their password every 90 days is
+specifically *not* recommended by the NIST standard. One practice that *is*
+strongly recommended by the NIST standard is to use multi-factor authentication.
+
+Today we're going to be talking about a subset of multi-factor authentication:
+two-factor authentication.
 
 ### What is Two Factor Authentication?
 
-Two factor authentication means that to login a user must have something more than his or her username and password. That is really three things:
-- username is something your user **is**,
-- and a password is something he or she **knows**,
-- the next step is to require something he or she **has**.
+So what is two-factor authentication? Two factor authentication means that to
+log in, a user must have something more than his or her username and password.
+So "two-factor" really means having three pieces of information to authenticate
+yourself with a system:
+- Something you **are**: Your username.
+- Something you **know**: Your password.
+- Something you **have**: The "second factor".
 
-A good way to do this is to require users, especially staff users, to use a smartphone app to generate a time-based two factor code.
+A good way to do this is to require users, especially staff users, to use a smartphone app to generate a **time-based two factor code**.
 
-Now, you’ve probably seen these time-based code implementations in some of the big name services that you use online, like Gmail and Dropbox, but it’s also easy to add it to your Ruby application as well.
+Now, you’ve probably seen these time-based code implementations in some of the
+big name services that you use online, like Gmail and Dropbox, and you might be
+surprised how easy it is to add it to your Ruby application!
 
 ### How Does TOTP Work?
-The Time-based One-time Password algorithm is an open standard. It is a hash-based algorithm that uses the shared secret along with the current timestamp to compute a six digit code that changes each minute and can only be used once.  
 
-The method is defined as:
+<!-- slide(n): mathematical representation of algorithm -->
 
+<!--
+For the graphic:
 - TC = floor((unixtime(now) − unixtime(T0)) / TI),
 - TOTP = HOTP(SecretKey, TC),
 - TOTP-Value = TOTP mod 10^6
-
 (Source [Wikpedia](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)).
+-->
 
-Thankfully the user does not need to remember this math because his or her smartphone will keep the secret key and compute the code on his or her behalf! And equally thankfully, there are a few really good Ruby gem implementations that can be used on the server side so that you can easily add TOTP to your Ruby applications today!
+The Time-based One-time Password algorithm is an open standard. It is a hash-based algorithm that uses the shared secret along with the current timestamp to compute a six digit code that changes each minute and can only be used once.  
 
-There are two aspects that you have to handle though to add TOTP to your web application. Enrollment, verification, and backup codes.
+Thankfully your users don't need to remember this math because their
+smartphones keep track of it! And equally
+thankfully, there are a few really good Ruby gem implementations that can be
+used on the server side so that you can easily add TOTP to your Ruby
+applications today!
+
+There are three aspects that you have to handle though to add TOTP to your web application. Enrollment, verification, and backup codes.
+
+<!-- [avdi] For VO, read titles as e.g. "let's talk about Enrollment" -->
 
 #### Enrollment
 
-On enrollment, our user is presented with a QR barcode that is an encoding of the secret string. But they can also be shown the code itself as you see here.
+On enrollment, we present our user with a QR barcode that is an encoding of
+a secret string. But they can also be shown the raw code itself as you see
+here.
 
-[PICTURE OF 2FA CODE]
+<!-- slide(n): [PICTURE OF 2FA CODE] -->
 
-The user scans the QR code or enters the secret string and completes the enrollment by confirming to current 6 digit TOTP code.  
+The user scans the QR code with their smartphone, or enters the secret string
+into the phone. To complete the enrollment, they type in the 6 digit TOTP code
+that their two-factor app is showing them into our website.
+
 
 [PICTURE OF ENTERING THE CODE]
 
-After this, the server can confirm that the user has in his or her position a device capable of generating a 6 digit code that can only be used one time and must be used within 60 seconds of its generation.
+After this, the server can confirm that the user has in his or her posession a
+full-enrolled device, and we're all set!
 
 #### Verification
 
-This one is easy. Ask for the user's 6 digit code and pass it along to the verifier.
+This one is easy. Ask for the user's 6 digit code and pass it along to the
+verifier gem.
 
 #### Backup Codes
 
@@ -92,4 +135,15 @@ The Two Factor Tapa has login page that is available to the public and a secret 
 
 ### Conclusion
 
-Providing two factor authentication is a necessary step to providing good web application security. Otherwise, no matter what else you do to try to improve security will be defeated via user's choice of poor passwords as well as falling victim of simple phishing attack. The next step will be to ensure that as many users as possible make use of the feature. You should consider requiring those with administrative access to use 2FA.  And finally, don't just implement but be a user. Many of the websites and services that we Rubyists use in our daily work support 2FA. Use it everywhere for your and your customers' protection.
+Implementing two factor authentication is a necessary step to providing good web
+application security. You could spend tons of time and money on other security
+measures to harden your system, but without two-factor, a user who makes a poor choice of
+password or falls victim to a spearphishing attack could render all of those
+safeguards inneffective.
+
+The next step will be to ensure that as many users as
+possible make use of the feature. You should consider requiring those with
+administrative access to use 2FA.  And finally, don't just implement but be a
+user. Many of the websites and services that we Rubyists use in our daily work,
+such as Heroku, Github, and AWS support 2FA. Use it everywhere for your and your
+customers' protection.
