@@ -1,7 +1,7 @@
-class PrivateTapasController < ApplicationController
-  def show
-  end
+# frozen_string_literal: true
 
-  def public
-  end
+class PrivateTapasController < ApplicationController
+  def show; end
+
+  def public; end
 end
