@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -25,7 +27,7 @@ class User < ApplicationRecord
          :rememberable,
          :trackable,
          :validatable,
-         :two_factor_authenticatable,
+         :two_factor_authenticatable, # Remember to remove database_authenticatable
          :two_factor_backupable,
          otp_secret_encryption_key: ENV['OTP_SECRET_ENCRYPTION_KEY']
 end
