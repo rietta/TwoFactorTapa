@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 20180427145111) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "consumed_timestamp"
     t.string "encrypted_otp_secret"
     t.string "encrypted_otp_secret_iv"
     t.string "encrypted_otp_secret_salt"
-    t.datetime "consumed_timestamp"
     t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
