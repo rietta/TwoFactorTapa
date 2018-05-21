@@ -11,6 +11,11 @@
     <%= f.password_field :password, required: true, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :otp_attempt, 'Current 2FA Code' %><br />
+    <%= f.text_field :otp_attempt, autocomplete: "off" %>
+  </div>
+
   <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
