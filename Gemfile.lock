@@ -46,6 +46,8 @@ GEM
     arel (8.0.0)
     attr_encrypted (3.1.0)
       encryptor (~> 3.0.0)
+    auto_strip_attributes (2.4.0)
+      activerecord (>= 4.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
@@ -221,6 +223,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  auto_strip_attributes
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

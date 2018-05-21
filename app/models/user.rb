@@ -25,6 +25,8 @@
 #
 
 class User < ApplicationRecord
+  auto_strip_attributes :email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :registerable,

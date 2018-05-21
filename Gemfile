@@ -29,6 +29,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'annotate'
 gem 'pry-rails'
 gem 'jquery-rails'
+gem 'auto_strip_attributes'
 
 ##############################################################################
 # Default Stuff from Rails New Below
