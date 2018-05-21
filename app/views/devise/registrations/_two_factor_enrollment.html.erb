@@ -19,5 +19,5 @@
 <%= f.hidden_field :enrolling_otp_secret, value: enrolling_otp_secret %>
 <div class="field">
   <%= f.label :otp_attempt, 'Confirm Current 2FA Code' %><br />
-  <%= f.number_field :otp_attempt, autocomplete: "off" %>
+  <%= f.number_field :otp_attempt, required: true, autocomplete: "off" %>
 </div>

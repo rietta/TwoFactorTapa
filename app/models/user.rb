@@ -38,8 +38,11 @@ class User < ApplicationRecord
          # :two_factor_backupable,    # For production use, you'll want backup codes
          otp_secret_encryption_key: ENV['OTP_SECRET_ENCRYPTION_KEY']
 
-  #
+  ###############################
   # OTP Enrollment Support
+  #
+  # You'll probably want to use a service object for a production-grade
+  # implementation.
   #
   attr_accessor :enrolling_otp_secret
   before_validation :setup_enrolling_otp, on: :create
@@ -55,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def validate_otp_secret_matches
-    return unless validate_and_consume_otp!(otp_attempt)
+    return if validate_and_consume_otp!(otp_attempt)
     errors.add(:otp_attempt, 'Does not match expected code. Please check again.')
     return false
   end
