@@ -15,9 +15,13 @@ namespace :demo_user do
     user = User.create(
       email: email,
       password: password,
-      otp_secret: enrolling_otp_secret,
+      enrolling_otp_secret: enrolling_otp_secret,
+      otp_attempt: User.new(otp_secret: enrolling_otp_secret).current_otp,
       otp_required_for_login: true
     )
+
+    # Specifically 
+    user.update_attribute(:consumed_timestep, nil)
 
     puts "\nAdd the following OTP secret to your smartphone app:"\
          "\n\n#{enrolling_otp_secret}"\
