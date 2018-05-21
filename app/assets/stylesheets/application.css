@@ -23,3 +23,8 @@ body {
   background-color: lightgreen;
   padding: 1.5em;
 }
+
+#enrolling_otp_secret {
+  font-weight: bold;
+  background-color: lightyellow;
+}
