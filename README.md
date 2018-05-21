@@ -1,5 +1,12 @@
 # RubyTapas #534 - Two Factor Authentication Demo Application
 
+## Important Security Notice
+
+**WARNING!** This demo application is an instructional example intended to demonstrate adding two factor authentication to
+a Rails application. It is not production code and should not
+just be copied and pasted into your production apps without understanding. The author also has not audited the implementation
+for all security issues.
+
 ## Demo Setup
 
 Everything you need to access the demo is setup by the `bin/setup` script.
