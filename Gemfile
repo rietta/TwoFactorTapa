@@ -28,6 +28,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'annotate'
 gem 'pry-rails'
+gem 'jquery-rails'
 
 ##############################################################################
 # Default Stuff from Rails New Below
