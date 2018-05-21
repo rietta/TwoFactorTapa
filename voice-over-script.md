@@ -1,5 +1,5 @@
 ### Why
-Sixty three percent of the big data breaches involving web apps in recent years have been perpetrated via compromised credentials! That is the bad guys simply log in using a valid username and password of a real user. Despite other technical ways that apps are routinely popped, many that are covered by the OWASP Top 10, as developers we cannot ignore the plight of the username and password.
+Sixty three percent of the big data breaches involving web apps in recent years have been perpetrated via compromised credentials! That is the bad guys simply log in using a valid username and password. Despite other technical ways that apps are routinely popped, many that are covered by the OWASP Top 10, as developers we cannot ignore the plight of the username and password.
 
 It's bad when any user's credentials are compromised, but
 it's worse it's a staff user who has access to OTHER people's data.
@@ -32,8 +32,7 @@ specifically *not* recommended.
 
 One thing that *is* strongly recommended is to use multi-factor authentication.
 
-Today we're going to be talking about a subset of multi-factor authentication:
-two-factor authentication.
+Today we're talking about a subset of multi-factor authentication. Two factor authentication!
 
 (~33 seconds)
 
@@ -41,7 +40,7 @@ two-factor authentication.
 
 ### What is Two Factor Authentication?
 
-So what is two-factor authentication? It means the user must have something more than their username and password.
+ That means the user must have something more than their username and password.
 
 So "two-factor" really means having three pieces of information to authenticate yourself with a system:
 
@@ -71,12 +70,9 @@ The time-based one-time password algorithm is an open standard.
 
 It works by hashing a shared secret with current timestamp to compute a six digit code that changes each minute and can only be used once.  
 
-There are multiple good smartphone apps for your users to choose from
-and a few really good Ruby gem implementations that can be
-used on the server side so that you can easily add TOTP to your Ruby
-applications
+There are multiple good smartphone apps for your users to choose from.
 
-There are three aspects that you have to handle though to add TOTP to your web application. Enrollment, verification, and backup codes.
+There are three aspects that you have to handle to add TOTP to your web application. Enrollment, verification, and backup codes.
 
 <!-- [avdi] For VO, read titles as e.g. "let's talk about Enrollment" -->
 
@@ -84,36 +80,26 @@ There are three aspects that you have to handle though to add TOTP to your web a
 
 #### Enrollment
 
-On enrollment, we present our user with a QR barcode that is an encoding of
-a secret string. But they can also be shown the raw code itself as you see
+On enrollment, we present our user with a QR barcode that is an encoding of a secret string. But they can also be shown the raw code itself as you see
 here.
 
 <!-- slide(n): [PICTURE OF 2FA CODE] -->
 
-The user scans the QR code with their smartphone, or enters the secret string
-into the phone. To complete the enrollment, they type in the 6 digit TOTP code
-that their two-factor app is showing them into our website.
-
 
 [PICTURE OF ENTERING THE CODE]
 
-After this, the server can confirm that the user has in their possession a full-enrolled device, and we're all set!
+The user scans or enters the secret and then types the current six digit code into our web form to confirm enrollment.
 
 #### Verification
 
-This one is easy. Ask for the user's 6 digit code and pass it along to the
-verifier gem.
+When a user account has 2FA enabled, enforce the required current valid 6 digit TOTP for authentication.
 
 #### Backup Codes
 
-One complication of two factor authentication is what to do if the user looses their smartphone or the app gets deleted. Locking a user out of your application is bad for business but making it trivial to bypass two factor authentication is really bad for security.
-
-A common approach is to give users a list of one time use backup codes to keep in a safe place. devise-two-factor supports this!
+You need to provide backup codes in case your user looses their smartphone or deletes the app.
 
 ### Code Example!
-I’m showing an example of the `devise-two-factor` gem added to a basic  Ruby on Rails and Devise application.
-
-The Two Factor Tapa app has login page that is available to the public and a secret lair page, where the member can see pictures of delicious tapas! However, because sharing these delicious tapas with unauthorized impostors would be a travesty, the user has to provide a current two factor code in addition to a password to login.
+I’m showing an example of a Ruby on Rails that shows DELICIOUS tapas to authenticated users. We're adding TOTP via the devise-two-factor gem.
 
 [VIDEO OF INTERACTING WITH WEB BROWSER, LOGGING IN AND SEEING A DELICIOUS TAPA]
 
@@ -122,9 +108,9 @@ The Two Factor Tapa app has login page that is available to the public and a sec
 ##### Gemfile
 [CODE EDITOR SCREEN CAP]
 
-I've added 4 gems to the default Gemfile that Rails new provided.
+I've added a few gems to Gemfile:
 
-- devise
+- devise for user authentication
 - devise-two-factor
 - and a library to natively generate QR codes without leaking secrets to some web API
 
@@ -133,7 +119,17 @@ Because we'll load the encryption secret from an environment variable, I've adde
 ##### User model / migration to show fields needed for the 2FA implementation
 [CODE EDITOR SCREEN CAP]
 
-In the
+The migration adds a 5 fields to the user model.
+
+The first three manage the symmetric encryption of the shared secret so that its not stored in the database in plaintext, which would be bad!
+
+The next keeps a record of the most recently used code so replays are rejected.
+
+And finally if 2FA is enabled for the user.
+
+In the user model, you see that we enabled the
+two_factor_authenticatable auth strategy and loaded
+the OTP encryption secret.
 
 ##### Verifying a current 2FA code not just on login
 [CODE EDITOR SCREEN CAP]
@@ -154,7 +150,9 @@ such as Heroku, Github, and AWS support 2FA. Use it everywhere for your and your
 customers' protection.
 
 
+(over 10 seconds)
 
+(negative 1:34)
 
 
 

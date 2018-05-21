@@ -27,6 +27,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 # Useful, but not specifically part of the demo or rails defaults
 
 gem 'annotate'
+gem 'pry-rails'
 
 ##############################################################################
 # Default Stuff from Rails New Below
