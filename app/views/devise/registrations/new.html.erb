@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", id: 'email_for_qr_code' %>
   </div>
 
   <div class="field">
@@ -20,6 +20,8 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+  <%= render(partial: 'two_factor_enrollment', locals: {f: f}) %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

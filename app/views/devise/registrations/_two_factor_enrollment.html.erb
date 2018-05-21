@@ -1,0 +1,23 @@
+<% enrolling_otp_secret = User.generate_otp_secret %>
+<h3>Two Factor Enrollment</h3>
+<p>
+  Please scan this barcode or enter
+  <span id='enrolling_otp_secret'><%= enrolling_otp_secret %></span>
+  into your OTP Authenticator app on your smartphone.
+</p>
+<div id="2fa-qr-code">
+  <em>A QR code will appear when you type your e-mail address.</em>
+</div>
+<p>
+  If you do not have an app:
+  <ul>
+    <li><a href='https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2' target='_blank' rel='noopener'>Download Google Authenticator for Android</a></li>
+    <li><a href='https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8' target='_blank' rel='noopener'>Download Google Authenticator for iOS</a></li>
+  </ul>
+</p>
+
+<%= f.hidden_field :enrolling_otp_secret, value: enrolling_otp_secret %>
+<div class="field">
+  <%= f.label :otp_attempt, 'Confirm Current 2FA Code' %><br />
+  <%= f.number_field :otp_attempt, autocomplete: "off" %>
+</div>

@@ -1,0 +1,1 @@
+<%= raw(RQRCode::render_qrcode(@enrolling_user.otp_provisioning_uri(@enrolling_user.email, issuer: APP_ENV_NAME), :svg, level: :l, unit: 5)) %>
