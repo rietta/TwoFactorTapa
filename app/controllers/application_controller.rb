@@ -7,5 +7,6 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:enrolling_otp_secret, :otp_attempt])
   end
 end

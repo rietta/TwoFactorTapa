@@ -37,4 +37,26 @@ class User < ApplicationRecord
          :two_factor_authenticatable, # Remember to remove database_authenticatable
          # :two_factor_backupable,    # For production use, you'll want backup codes
          otp_secret_encryption_key: ENV['OTP_SECRET_ENCRYPTION_KEY']
+
+  #
+  # OTP Enrollment Support
+  #
+  attr_accessor :enrolling_otp_secret
+  before_validation :setup_enrolling_otp, on: :create
+  validates :enrolling_otp_secret, presence: true, format: {with: /\A[a-zA-Z0-9]*\z/ }, on: :create
+  validate :validate_otp_secret_matches, on: :create
+
+  private
+
+  def setup_enrolling_otp
+    return if persisted? || enrolling_otp_secret.nil?
+    self.otp_required_for_login = true
+    self.otp_secret = enrolling_otp_secret
+  end
+
+  def validate_otp_secret_matches
+    return unless validate_and_consume_otp!(otp_attempt)
+    errors.add(:otp_attempt, 'Does not match expected code. Please check again.')
+    return false
+  end
 end

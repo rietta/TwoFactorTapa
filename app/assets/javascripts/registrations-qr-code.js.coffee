@@ -10,6 +10,7 @@ $(document).ready ->
     # generate a QR code without hitting an external API. When the user
     # scans the code, it will conveniently show the name of our app
     # and the e-mail address for the account that is being enrolled.
+    console.log("Requesting a QR code.")
     $.post '/two_factor_qr_codes',
       enrolling_user: {email: email_address, otp_secret: enrolling_otp_secret}
       (data) ->
