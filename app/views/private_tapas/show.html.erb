@@ -1,4 +1,24 @@
-<h1>You've Made it to the Secret Lair</h1>
+<h1>The Demo Land of Delicious Tapas</h1>
 <p>
   You made it past the guard! The secret code is <%= SecureRandom.hex %>.
+</p>
+
+<p>
+  Enjoy these delicious tapas images courtesy of
+  <a href="https://pixabay.com">pixabay.com</a>
+</p>
+
+<iframe
+  width="100%"
+  height="700"
+  src="https://pixabay.com/en/photos/?q=spanish+tapas&hp=&image_type=all&order=popular&cat=&min_width=&min_height="></iframe>
+
+<p>
+  For even more delicious tapas, you can use
+  <a href="https://www.google.com/search?tbm=isch&source=hp&biw=1057&bih=1061&ei=etsCW9bvIYTyzgL-7orACw&q=delicious+tapas&oq=delicious+tapas&gs_l=img.3..0j0i24k1l2.1570.4944.0.5177.15.13.0.2.2.0.85.651.13.13.0....0...1ac.1.64.img..0.15.658....0.5skQ1hKhyII">
+    Google Image Search: Delicious Tapas</a>.
+</p>
+
+<p>
+  Done? <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
 </p>

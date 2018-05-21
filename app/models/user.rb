@@ -33,6 +33,6 @@ class User < ApplicationRecord
          :trackable,
          :validatable,
          :two_factor_authenticatable, # Remember to remove database_authenticatable
-         :two_factor_backupable,
+         # :two_factor_backupable,    # For production use, you'll want backup codes
          otp_secret_encryption_key: ENV['OTP_SECRET_ENCRYPTION_KEY']
 end

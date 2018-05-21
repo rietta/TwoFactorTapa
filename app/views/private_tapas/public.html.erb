@@ -1,3 +1,9 @@
 <h1>Welcome to Delicious Tapas</h1>
 
-<p>You still need to login to see tapas.</p>
+<p>
+  You still need to
+  <%= link_to('login to see', new_user_session_path) %>
+  tapas.
+</p>
+
+<%= render(partial: 'devise/sessions/login_form') %>
