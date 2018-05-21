@@ -6,7 +6,14 @@ class PrivateTapasController < ApplicationController
   def show; end
 
   def public
-    return unless user_signed_in?
-    redirect_to private_tapas_path, only_root: true
+    if user_signed_in?
+      redirect_to(private_tapas_path, only_root: true)
+    else
+      redirect_to(
+        new_user_session_path,
+        only_root: true,
+        notice: 'Please login to see delicious tapas.'
+      )
+    end
   end
 end
