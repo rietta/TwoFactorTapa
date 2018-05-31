@@ -1,4 +1,4 @@
-# RubyTapas #534 - Two Factor Authentication Demo Application
+# RubyTapas #530 - Two Factor Authentication Demo Application
 
 ## Important Security Notice
 

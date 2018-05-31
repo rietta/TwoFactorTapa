@@ -150,14 +150,6 @@ such as Heroku, Github, and AWS support 2FA. Use it everywhere for your and your
 customers' protection.
 
 
-(over 10 seconds)
-
-(negative 1:34)
-
-
-
-
-
 
 
 
