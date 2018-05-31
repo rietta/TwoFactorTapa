@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 ##############################################################################
-# Specific gems for the Two Factor Topa Demo
+# Specific gems for the Two Factor Tapa Demo
 
 # The user authentication system and our 2FA library
 gem 'devise'
